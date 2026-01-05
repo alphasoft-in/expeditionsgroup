@@ -297,16 +297,16 @@ export default function Dashboard() {
                     <div className="overflow-x-auto">
                         <table className="w-full text-left border-collapse">
                             <thead>
-                                <tr className="bg-slate-50 text-slate-600 text-sm font-semibold border-b border-slate-200">
-                                    <th className="px-6 py-4">Fecha</th>
-                                    <th className="px-6 py-4">Servicio</th>
-                                    <th className="px-6 py-4">Cliente / Alumno</th>
-                                    <th className="px-6 py-4">Monto</th>
-                                    <th className="px-6 py-4">Estado</th>
-                                    <th className="px-6 py-4">Detalles</th>
+                                <tr className="bg-slate-50 text-slate-600 text-xs sm:text-sm font-semibold border-b border-slate-200">
+                                    <th className="px-4 sm:px-6 py-4">Fecha</th>
+                                    <th className="px-4 sm:px-6 py-4 hidden md:table-cell">Servicio</th>
+                                    <th className="px-4 sm:px-6 py-4">Cliente / Alumno</th>
+                                    <th className="px-4 sm:px-6 py-4">Monto</th>
+                                    <th className="px-4 sm:px-6 py-4">Estado</th>
+                                    <th className="px-4 sm:px-6 py-4">Acción</th>
                                 </tr>
                             </thead>
-                            <tbody className="text-sm">
+                            <tbody className="text-xs sm:text-sm">
                                 {operations.length === 0 ? (
                                     <tr>
                                         <td colSpan="6" className="px-6 py-12 text-center text-slate-400">
@@ -316,52 +316,56 @@ export default function Dashboard() {
                                 ) : (
                                     operations.map((op) => (
                                         <tr key={op.id} className="border-b border-slate-100 last:border-0 hover:bg-slate-50/50 transition-colors">
-                                            <td className="px-6 py-4 text-slate-600">
-                                                {new Date(op.date).toLocaleDateString()} <span className="text-xs text-slate-400 block">{new Date(op.date).toLocaleTimeString()}</span>
+                                            <td className="px-4 sm:px-6 py-4 text-slate-600">
+                                                <span className="whitespace-nowrap">{new Date(op.date).toLocaleDateString()}</span>
+                                                <span className="text-[10px] text-slate-400 block md:hidden">{new Date(op.date).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
+                                                <span className="text-xs text-slate-400 hidden md:block">{new Date(op.date).toLocaleTimeString()}</span>
                                             </td>
-                                            <td className="px-6 py-4">
-                                                <span className={`inline-block px-3 py-1 rounded-full text-xs font-bold capitalize ${op.serviceType === 'escolar' ? 'bg-blue-100 text-blue-700' : 'bg-purple-100 text-purple-700'}`}>
+                                            <td className="px-4 sm:px-6 py-4 hidden md:table-cell">
+                                                <span className={`inline-block px-3 py-1 rounded-full text-[10px] font-bold capitalize ${op.serviceType === 'escolar' ? 'bg-blue-100 text-blue-700' : 'bg-purple-100 text-purple-700'}`}>
                                                     {op.serviceType}
                                                 </span>
                                             </td>
-                                            <td className="px-6 py-4 font-medium text-slate-800">
-                                                {op.studentName || op.clientName || 'N/A'}
-                                                <div className="text-xs text-slate-400 font-normal">
+                                            <td className="px-4 sm:px-6 py-4 font-medium text-slate-800">
+                                                <div className="truncate max-w-[120px] sm:max-w-none">
+                                                    {op.studentName || op.clientName || 'N/A'}
+                                                </div>
+                                                <div className="text-[10px] text-slate-400 font-normal">
                                                     {op.studentDoc || op.clientDoc}
                                                 </div>
                                             </td>
-                                            <td className="px-6 py-4 font-bold text-slate-700">
+                                            <td className="px-4 sm:px-6 py-4 font-bold text-slate-700 whitespace-nowrap">
                                                 {op.currency === 'Dólares (USD)' ? '$' : 'S/'} {op.amount}
                                             </td>
-                                            <td className="px-6 py-4">
+                                            <td className="px-4 sm:px-6 py-4">
                                                 <div className="relative inline-block">
                                                     <select
                                                         value={op.status}
                                                         onChange={(e) => handleStatusChange(op.id, e.target.value)}
-                                                        className={`appearance-none pl-3 pr-8 py-1 rounded-full text-xs font-bold cursor-pointer outline-none focus:ring-2 focus:ring-offset-1 transition-all
+                                                        className={`appearance-none pl-2 sm:pl-3 pr-6 sm:pr-8 py-1 rounded-full text-[10px] sm:text-xs font-bold cursor-pointer outline-none focus:ring-2 focus:ring-offset-1 transition-all
                                                             ${op.status === 'pending' ? 'bg-amber-100 text-amber-700 focus:ring-amber-500' : ''}
                                                             ${op.status === 'approved' ? 'bg-emerald-100 text-emerald-700 focus:ring-emerald-500' : ''}
                                                             ${op.status === 'rejected' ? 'bg-red-100 text-red-700 focus:ring-red-500' : ''}
                                                         `}
                                                     >
-                                                        <option value="pending">Pendiente</option>
-                                                        <option value="approved">Aprobado</option>
-                                                        <option value="rejected">Rechazado</option>
+                                                        <option value="pending">Pend.</option>
+                                                        <option value="approved">Apro.</option>
+                                                        <option value="rejected">Rech.</option>
                                                     </select>
-                                                    <div className="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none text-current opacity-60">
-                                                        <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <div className="absolute inset-y-0 right-0 flex items-center px-1.5 sm:px-2 pointer-events-none text-current opacity-60">
+                                                        <svg className="w-2.5 h-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
                                                         </svg>
                                                     </div>
                                                 </div>
                                             </td>
-                                            <td className="px-6 py-4">
+                                            <td className="px-4 sm:px-6 py-4">
                                                 {op.voucherUrl ? (
-                                                    <a href={op.voucherUrl} target="_blank" rel="noopener noreferrer" className="text-secondary hover:text-secondary/80 font-medium transition-colors">
-                                                        Ver Voucher
+                                                    <a href={op.voucherUrl} target="_blank" rel="noopener noreferrer" className="text-secondary hover:text-secondary/80 font-bold text-xs sm:text-sm transition-colors">
+                                                        Ver
                                                     </a>
                                                 ) : (
-                                                    <span className="text-slate-400 italic">No voucher</span>
+                                                    <span className="text-slate-400 italic text-[10px]">Sin voucher</span>
                                                 )}
                                             </td>
                                         </tr>
