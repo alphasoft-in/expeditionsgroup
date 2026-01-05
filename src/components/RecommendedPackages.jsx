@@ -30,18 +30,18 @@ export default function RecommendedPackages() {
                 </div>
 
                 {/* Grid */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10 lg:gap-12">
                     {packages.map((pkg, index) => (
                         <motion.div
                             key={pkg.id}
-                            initial={{ opacity: 0, y: 30 }}
+                            initial={{ opacity: 0, y: 20 }}
                             whileInView={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.5, delay: index * 0.1 }}
-                            viewport={{ once: true }}
+                            transition={{ duration: 0.8, ease: "easeOut" }}
+                            viewport={{ once: true, margin: "-50px" }}
                             className="group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border border-secondary/10 flex flex-col h-full"
                         >
                             {/* Image */}
-                            <div className="relative h-64 overflow-hidden shrink-0">
+                            <div className="relative h-64 overflow-hidden shrink-0 bg-slate-100">
                                 <img
                                     src={pkg.image}
                                     alt={pkg.title}
