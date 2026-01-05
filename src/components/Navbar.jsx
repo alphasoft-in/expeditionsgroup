@@ -187,7 +187,7 @@ export default function Navbar() {
                         transition={{ type: "spring", damping: 25, stiffness: 200 }}
                         className="fixed inset-0 z-40 bg-zinc-900/95 backdrop-blur-xl xl:hidden flex flex-col pt-24 pb-8 overflow-y-auto"
                     >
-                        <nav className="flex flex-col px-6 space-y-4 w-full container mx-auto">
+                        <nav className="flex flex-col px-6 space-y-2 w-full container mx-auto">
                             {links.map((link) => {
                                 const isActive = isLinkActive(link);
                                 return (
@@ -197,7 +197,7 @@ export default function Navbar() {
                                                 href={link.href}
                                                 target={link.target || "_self"}
                                                 rel={link.target === "_blank" ? "noopener noreferrer" : ""}
-                                                className="block w-full text-center bg-secondary py-4 rounded-xl text-white font-bold text-xl shadow-lg mt-4"
+                                                className="block w-full text-center bg-secondary py-3 rounded-xl text-white font-bold text-lg shadow-lg mt-4"
                                                 onClick={() => setIsMobileMenuOpen(false)}
                                             >
                                                 {link.name}
@@ -209,7 +209,7 @@ export default function Navbar() {
                                                         href={link.href}
                                                         target={link.target || "_self"}
                                                         rel={link.target === "_blank" ? "noopener noreferrer" : ""}
-                                                        className={`text-2xl font-semibold transition-colors py-2 block ${isActive ? 'text-secondary' : 'text-white/90 hover:text-white'}`}
+                                                        className={`text-xl font-semibold transition-colors py-2 block ${isActive ? 'text-secondary' : 'text-white/90 hover:text-white'}`}
                                                         onClick={(e) => {
                                                             if (link.children) {
                                                                 e.preventDefault();
@@ -247,7 +247,7 @@ export default function Navbar() {
                                                                     <a
                                                                         key={child.name}
                                                                         href={child.href}
-                                                                        className={`px-6 py-3 text-lg transition-colors ${activeLink === child.href
+                                                                        className={`px-6 py-2.5 text-base transition-colors ${activeLink === child.href
                                                                             ? 'text-secondary bg-white/10 font-bold'
                                                                             : 'text-white/70 hover:text-white hover:bg-white/10'
                                                                             }`}
