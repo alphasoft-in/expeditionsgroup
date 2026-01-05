@@ -40,18 +40,18 @@ export default function PageHeader({ title, subtitle, image, className = "" }) {
             </motion.div>
 
             {/* Content */}
-            <div className="relative z-10 flex flex-col items-center justify-center h-full text-center px-6 sm:px-8 pt-32 sm:pt-24">
+            <div className="relative z-10 flex flex-col items-center justify-center h-full text-center px-4 sm:px-6 md:px-8 pt-32 sm:pt-24">
                 <motion.div
                     initial={{ opacity: 0, y: 30, filter: "blur(10px)" }}
                     animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
                     transition={{ duration: 0.8, ease: "easeOut" }}
                     className="flex flex-col items-center"
                 >
-                    <h1 className="text-xl sm:text-5xl md:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-white via-white to-secondary mb-3 sm:mb-4 drop-shadow-2xl tracking-tight px-2 pb-2">
+                    <h1 className="text-xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-white via-white to-secondary mb-3 sm:mb-4 drop-shadow-2xl tracking-tight px-2 pb-2">
                         {title}
                     </h1>
                     {subtitle && (
-                        <p className="text-[9px] sm:text-base md:text-lg text-light/90 max-w-3xl font-light tracking-wide leading-relaxed drop-shadow-lg px-2 sm:px-4">
+                        <p className="text-[11px] sm:text-base md:text-lg text-light/90 max-w-3xl font-light tracking-wide leading-relaxed drop-shadow-lg px-2 sm:px-4">
                             {subtitle}
                         </p>
                     )}

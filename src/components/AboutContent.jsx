@@ -2,9 +2,9 @@ import { motion } from "framer-motion";
 
 export default function AboutContent({ image }) {
     return (
-        <div className="max-w-6xl mx-auto px-6 lg:px-12 py-10 sm:py-16 relative z-10">
+        <div className="max-w-6xl mx-auto px-8 sm:px-12 lg:px-16 py-12 sm:py-20 relative z-10">
             {/* Who We Are Section - Side by Side with Image */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-16 items-center mb-10 sm:mb-20">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 sm:gap-16 items-center mb-16 sm:mb-24">
                 <motion.div
                     initial={{ opacity: 0, x: -30 }}
                     whileInView={{ opacity: 1, x: 0 }}
@@ -14,7 +14,7 @@ export default function AboutContent({ image }) {
                     <span className="text-secondary font-bold tracking-widest uppercase text-sm mb-3 block">
                         ¿Quiénes somos?
                     </span>
-                    <h2 className="text-xl sm:text-4xl md:text-5xl font-bold text-slate-900 mb-6 sm:mb-8 leading-tight">
+                    <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-slate-900 mb-6 sm:mb-8 leading-tight max-w-[280px] sm:max-w-none">
                         Experiencias que <br className="hidden sm:block" />
                         <span className="text-primary">Transforman</span>
                     </h2>
