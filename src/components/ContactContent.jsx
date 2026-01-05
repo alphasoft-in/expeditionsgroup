@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 
 export default function ContactContent() {
     return (
-        <div className="max-w-6xl mx-auto px-8 sm:px-12 lg:px-16 py-12 sm:py-20 relative z-10">
+        <div className="max-w-6xl mx-auto px-8 sm:px-12 lg:px-16 py-12 sm:py-20 relative z-10 overflow-hidden">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 sm:gap-16 lg:gap-24 items-start">
 
                 {/* Contact Info Column */}
@@ -86,7 +86,7 @@ export default function ContactContent() {
                     whileInView={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
                     viewport={{ once: true }}
-                    className="relative"
+                    className="relative overflow-hidden"
                 >
                     {/* Decorative Blob */}
                     <div className="absolute top-0 right-0 -mr-20 -mt-20 w-64 h-64 bg-secondary/10 rounded-full blur-3xl pointer-events-none opacity-50"></div>

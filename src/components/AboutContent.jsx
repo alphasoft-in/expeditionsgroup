@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 
 export default function AboutContent({ image }) {
     return (
-        <div className="max-w-6xl mx-auto px-8 sm:px-12 lg:px-16 py-12 sm:py-20 relative z-10">
+        <div className="max-w-6xl mx-auto px-8 sm:px-12 lg:px-16 py-12 sm:py-20 relative z-10 overflow-hidden">
             {/* Who We Are Section - Side by Side with Image */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 sm:gap-16 items-center mb-16 sm:mb-24">
                 <motion.div
@@ -38,7 +38,7 @@ export default function AboutContent({ image }) {
                     whileInView={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
                     viewport={{ once: true }}
-                    className="relative group"
+                    className="relative group overflow-hidden"
                 >
                     {/* Decorative Elements */}
                     <div className="absolute -inset-4 bg-gradient-to-tr from-secondary/20 to-primary/20 rounded-3xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
