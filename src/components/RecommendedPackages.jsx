@@ -30,7 +30,7 @@ export default function RecommendedPackages() {
                 </div>
 
                 {/* Grid */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10 lg:gap-12">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
                     {packages.map((pkg, index) => (
                         <motion.div
                             key={pkg.id}
