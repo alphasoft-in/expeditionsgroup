@@ -34,10 +34,10 @@ export default function RecommendedPackages() {
                     {packages.map((pkg, index) => (
                         <motion.div
                             key={pkg.id}
-                            initial={{ opacity: 0, y: 20 }}
+                            initial={{ opacity: 0, y: 10 }}
                             whileInView={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.8, ease: "easeOut" }}
-                            viewport={{ once: true, margin: "-50px" }}
+                            transition={{ duration: 0.5, ease: "easeOut" }}
+                            viewport={{ once: true, margin: "100px" }}
                             className="group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border border-secondary/10 flex flex-col h-full"
                         >
                             {/* Image */}
