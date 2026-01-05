@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import * as XLSX from 'xlsx-js-style';
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
+import { supabase } from '../lib/supabase';
 
 export default function Dashboard() {
     const [operations, setOperations] = useState([]);
@@ -10,34 +11,92 @@ export default function Dashboard() {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        // Auth check
-        const isAuth = localStorage.getItem('isAuthenticated');
-        if (!isAuth) {
-            window.location.href = '/login';
-            return;
-        }
-
-        const userData = JSON.parse(localStorage.getItem('user') || '{}');
-        setUser(userData);
-
-        // Load operations
-        const ops = JSON.parse(localStorage.getItem('operations') || '[]');
-        setOperations(ops);
-        setLoading(false);
+        fetchOperations();
     }, []);
 
-    const handleLogout = () => {
+    const fetchOperations = async () => {
+        try {
+            // Check session
+            const { data: { session } } = await supabase.auth.getSession();
+            if (!session) {
+                // Fallback to local check if needed, or redirect
+                if (!localStorage.getItem('isAuthenticated')) {
+                    window.location.href = '/login';
+                    return;
+                }
+            }
+
+            // Set User info from Supabase or Local
+            if (session?.user) {
+                setUser({
+                    email: session.user.email,
+                    name: session.user.user_metadata?.name || 'Usuario'
+                });
+            } else {
+                const userData = JSON.parse(localStorage.getItem('user') || '{}');
+                setUser(userData);
+            }
+
+            // Fetch Data
+            const { data, error } = await supabase
+                .from('operations')
+                .select('*')
+                .order('created_at', { ascending: false });
+
+            if (error) throw error;
+
+            // Transform snake_case to camelCase for UI compatibility
+            const transformedOps = (data || []).map(op => ({
+                id: op.id,
+                date: op.created_at,
+                status: op.status,
+                serviceType: op.service_type,
+                studentName: op.student_name,
+                studentDoc: op.student_doc,
+                clientName: op.client_name,
+                clientDoc: op.client_doc,
+                amount: op.amount,
+                currency: op.currency,
+                operationNumber: op.operation_number,
+                bank: op.bank,
+                voucherUrl: op.voucher_url
+            }));
+
+            setOperations(transformedOps);
+        } catch (error) {
+            console.error('Error loading dashboard:', error);
+            // Optional: fallback to localStorage if offline? For now just log.
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const handleLogout = async () => {
+        await supabase.auth.signOut();
         localStorage.removeItem('isAuthenticated');
         localStorage.removeItem('user');
         window.location.href = '/login';
     };
 
-    const handleStatusChange = (id, newStatus) => {
-        const updatedOps = operations.map(op =>
+    const handleStatusChange = async (id, newStatus) => {
+        // Optimistic Update
+        setOperations(prev => prev.map(op =>
             op.id === id ? { ...op, status: newStatus } : op
-        );
-        setOperations(updatedOps);
-        localStorage.setItem('operations', JSON.stringify(updatedOps));
+        ));
+
+        try {
+            const { error } = await supabase
+                .from('operations')
+                .update({ status: newStatus })
+                .eq('id', id);
+
+            if (error) throw error;
+        } catch (error) {
+            console.error('Error updating status:', error);
+            alert('Error al actualizar estado');
+            // Revert on error could go here
+            fetchOperations();
+        }
     };
 
     const exportToExcel = () => {
@@ -159,7 +218,11 @@ export default function Dashboard() {
         doc.save(`reporte_expeditions_${new Date().toISOString().split('T')[0]}.pdf`);
     };
 
-    if (loading) return null;
+    if (loading) return (
+        <div className="flex justify-center items-center min-h-screen">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-secondary"></div>
+        </div>
+    );
 
     return (
         <div className="min-h-screen bg-slate-50 font-sans">
@@ -225,18 +288,6 @@ export default function Dashboard() {
                                         className="px-4 py-2 text-sm font-bold text-red-600 bg-red-50 hover:bg-red-100 rounded-lg transition-colors border border-red-200"
                                     >
                                         Exportar PDF
-                                    </button>
-                                    <div className="w-px h-8 bg-slate-200 mx-2"></div>
-                                    <button
-                                        onClick={() => {
-                                            if (confirm('¿Seguro que deseas limpiar el historial?')) {
-                                                setOperations([]);
-                                                localStorage.removeItem('operations');
-                                            }
-                                        }}
-                                        className="text-slate-400 hover:text-red-500 text-sm transition-colors"
-                                    >
-                                        Limpiar historial
                                     </button>
                                 </>
                             )}
@@ -305,9 +356,13 @@ export default function Dashboard() {
                                                 </div>
                                             </td>
                                             <td className="px-6 py-4">
-                                                <button className="text-secondary hover:text-secondary/80 font-medium transition-colors">
-                                                    Ver Voucher
-                                                </button>
+                                                {op.voucherUrl ? (
+                                                    <a href={op.voucherUrl} target="_blank" rel="noopener noreferrer" className="text-secondary hover:text-secondary/80 font-medium transition-colors">
+                                                        Ver Voucher
+                                                    </a>
+                                                ) : (
+                                                    <span className="text-slate-400 italic">No voucher</span>
+                                                )}
                                             </td>
                                         </tr>
                                     ))

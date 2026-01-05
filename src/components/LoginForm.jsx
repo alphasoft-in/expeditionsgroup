@@ -1,19 +1,42 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
+import { supabase } from '../lib/supabase';
 
 export default function LoginForm() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(null);
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
+        setLoading(true);
+        setError(null);
 
-        // Simulación de login exitoso
-        localStorage.setItem('isAuthenticated', 'true');
-        localStorage.setItem('user', JSON.stringify({ email, name: 'Usuario Demo' }));
+        try {
+            const { data, error } = await supabase.auth.signInWithPassword({
+                email,
+                password,
+            });
 
-        // Redireccionar al dashboard
-        window.location.href = '/dashboard';
+            if (error) throw error;
+
+            // Login exitoso
+            localStorage.setItem('isAuthenticated', 'true');
+            localStorage.setItem('user', JSON.stringify({
+                email: data.user.email,
+                id: data.user.id,
+                name: data.user.user_metadata?.name || 'Usuario'
+            }));
+
+            // Redireccionar al dashboard
+            window.location.href = '/dashboard';
+
+        } catch (err) {
+            setError('Error al iniciar sesión: ' + err.message);
+        } finally {
+            setLoading(false);
+        }
     };
 
     return (
@@ -28,6 +51,12 @@ export default function LoginForm() {
                     <h2 className="text-3xl font-bold text-slate-800 mb-2">Bienvenido</h2>
                     <p className="text-slate-500">Ingresa a tu cuenta para continuar</p>
                 </div>
+
+                {error && (
+                    <div className="mb-4 p-3 bg-red-100 border border-red-200 text-red-700 rounded-lg text-sm text-center">
+                        {error}
+                    </div>
+                )}
 
                 <form onSubmit={handleSubmit} className="space-y-6">
                     <div>
@@ -69,9 +98,10 @@ export default function LoginForm() {
                         whileHover={{ scale: 1.02 }}
                         whileTap={{ scale: 0.98 }}
                         type="submit"
-                        className="w-full py-3.5 bg-gradient-to-r from-secondary to-primary text-white font-bold rounded-xl shadow-lg shadow-secondary/30 hover:shadow-xl hover:shadow-secondary/40 transition-all duration-300"
+                        disabled={loading}
+                        className={`w-full py-3.5 bg-gradient-to-r from-secondary to-primary text-white font-bold rounded-xl shadow-lg shadow-secondary/30 hover:shadow-xl hover:shadow-secondary/40 transition-all duration-300 ${loading ? 'opacity-70 cursor-not-allowed' : ''}`}
                     >
-                        Iniciar Sesión
+                        {loading ? 'Iniciando...' : 'Iniciar Sesión'}
                     </motion.button>
                 </form>
 
