@@ -85,7 +85,7 @@ export default function Hero() {
             </AnimatePresence>
 
             {/* Content */}
-            <div className="relative z-10 flex flex-col items-center justify-center h-full text-center px-4">
+            <div className="relative z-10 flex flex-col items-center justify-center h-full text-center px-8">
                 <AnimatePresence mode="wait">
                     <motion.div
                         key={current}
