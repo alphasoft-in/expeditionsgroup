@@ -3,8 +3,8 @@ import { motion } from 'framer-motion';
 
 export default function ContactContent() {
     return (
-        <div className="max-w-6xl mx-auto px-8 lg:px-12 py-20 relative z-10">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-start">
+        <div className="max-w-6xl mx-auto px-4 sm:px-8 lg:px-12 py-12 sm:py-20 relative z-10">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 sm:gap-16 lg:gap-24 items-start">
 
                 {/* Contact Info Column */}
                 <motion.div
@@ -18,8 +18,8 @@ export default function ContactContent() {
                         <span className="text-secondary font-bold tracking-widest uppercase text-xs mb-3 block pl-1">
                             Contáctanos
                         </span>
-                        <h2 className="text-5xl font-bold text-slate-900 mb-6 leading-tight">
-                            Estamos para <br />
+                        <h2 className="text-3xl sm:text-5xl font-bold text-slate-900 mb-6 leading-tight">
+                            Estamos para <br className="hidden sm:block" />
                             <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">Ayudarte</span>
                         </h2>
                         <p className="text-lg text-slate-600 leading-relaxed font-light max-w-md">
@@ -92,7 +92,7 @@ export default function ContactContent() {
                     <div className="absolute top-0 right-0 -mr-20 -mt-20 w-64 h-64 bg-secondary/10 rounded-full blur-3xl pointer-events-none opacity-50"></div>
                     <div className="absolute bottom-0 left-0 -ml-20 -mb-20 w-64 h-64 bg-primary/10 rounded-full blur-3xl pointer-events-none opacity-50"></div>
 
-                    <div className="bg-white rounded-3xl shadow-2xl p-8 md:p-12 border border-slate-100 relative z-10 overflow-hidden">
+                    <div className="bg-white rounded-2xl sm:rounded-3xl shadow-2xl p-6 sm:p-8 md:p-12 border border-slate-100 relative z-10 overflow-hidden">
                         {/* Top Accent Line */}
                         <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-secondary to-primary transform origin-left hover:scale-x-110 transition-transform duration-500"></div>
 
@@ -135,7 +135,7 @@ export default function ContactContent() {
                                 <textarea
                                     id="message"
                                     rows="4"
-                                    className="w-full px-5 py-3.5 rounded-xl bg-slate-50 border border-slate-200 focus:border-secondary focus:bg-white outline-none transition-all duration-300 text-slate-700 placeholder:text-slate-300 shadow-sm focus:shadow-md focus:shadow-secondary/10 resize-none"
+                                    className="w-full px-5 py-3 rounded-xl bg-slate-50 border border-slate-200 focus:border-secondary focus:bg-white outline-none transition-all duration-300 text-slate-700 placeholder:text-slate-300 shadow-sm focus:shadow-md focus:shadow-secondary/10 resize-none text-base"
                                     placeholder="Cuéntanos sobre tu viaje ideal..."
                                 ></textarea>
                             </div>

@@ -2,9 +2,9 @@ import { motion } from "framer-motion";
 
 export default function AboutContent({ image }) {
     return (
-        <div className="max-w-6xl mx-auto px-8 lg:px-12 py-16 relative z-10">
+        <div className="max-w-6xl mx-auto px-4 sm:px-8 lg:px-12 py-10 sm:py-16 relative z-10">
             {/* Who We Are Section - Side by Side with Image */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-20">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-16 items-center mb-12 sm:mb-20">
                 <motion.div
                     initial={{ opacity: 0, x: -30 }}
                     whileInView={{ opacity: 1, x: 0 }}
@@ -14,8 +14,8 @@ export default function AboutContent({ image }) {
                     <span className="text-secondary font-bold tracking-widest uppercase text-sm mb-3 block">
                         ¿Quiénes somos?
                     </span>
-                    <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-8 leading-tight">
-                        Experiencias que <br />
+                    <h2 className="text-3xl md:text-5xl font-bold text-slate-900 mb-6 sm:mb-8 leading-tight">
+                        Experiencias que <br className="hidden sm:block" />
                         <span className="text-primary">Transforman</span>
                     </h2>
                     <div className="space-y-6 text-slate-600 text-lg leading-relaxed font-light">
@@ -48,7 +48,7 @@ export default function AboutContent({ image }) {
                         <img
                             src={image}
                             alt="Equipo Expeditions Group"
-                            className="w-full h-[400px] md:h-[500px] object-cover hover:scale-105 transition-transform duration-700 ease-out"
+                            className="w-full h-[300px] sm:h-[400px] md:h-[500px] object-cover hover:scale-105 transition-transform duration-700 ease-out"
                         />
                     </div>
 
