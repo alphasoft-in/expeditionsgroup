@@ -3,8 +3,8 @@ import { motion } from 'framer-motion';
 
 export default function ContactContent() {
     return (
-        <div className="max-w-6xl mx-auto px-4 sm:px-8 lg:px-12 py-12 sm:py-20 relative z-10">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 sm:gap-16 lg:gap-24 items-start">
+        <div className="max-w-6xl mx-auto px-6 lg:px-12 py-12 sm:py-20 relative z-10">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-16 lg:gap-24 items-start">
 
                 {/* Contact Info Column */}
                 <motion.div
@@ -18,7 +18,7 @@ export default function ContactContent() {
                         <span className="text-secondary font-bold tracking-widest uppercase text-xs mb-3 block pl-1">
                             Contáctanos
                         </span>
-                        <h2 className="text-3xl sm:text-5xl font-bold text-slate-900 mb-6 leading-tight">
+                        <h2 className="text-2xl sm:text-5xl font-bold text-slate-900 mb-6 leading-tight">
                             Estamos para <br className="hidden sm:block" />
                             <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">Ayudarte</span>
                         </h2>
