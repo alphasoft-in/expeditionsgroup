@@ -1,0 +1,82 @@
+---
+import "../styles/global.css";
+import VoucherForm from "../components/VoucherForm.jsx";
+---
+
+<!doctype html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width" />
+        <!-- Favicon -->
+        <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+        <!-- Accesibilidad y mejoras UX -->
+        <meta name="theme-color" content="#0f172a" />
+
+        <link
+            rel="apple-touch-icon"
+            sizes="180x180"
+            href="/apple-touch-icon.png"
+        />
+        <link
+            rel="icon"
+            type="image/png"
+            sizes="32x32"
+            href="/favicon-32x32.png"
+        />
+        <link
+            rel="icon"
+            type="image/png"
+            sizes="16x16"
+            href="/favicon-16x16.png"
+        />
+        <link rel="manifest" href="/site.webmanifest" />
+        <title>Registro de Pagos | Expeditions Group</title>
+    </head>
+    <body class="bg-slate-50 text-slate-800">
+        <main
+            class="min-h-screen flex items-center justify-center p-4 relative overflow-hidden"
+        >
+            {/* Background Elements matching Login */}
+            <div
+                class="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none"
+            >
+                <div
+                    class="absolute -top-24 -right-24 w-96 h-96 bg-secondary/10 rounded-full blur-3xl"
+                >
+                </div>
+                <div
+                    class="absolute top-1/2 -left-24 w-72 h-72 bg-primary/10 rounded-full blur-3xl"
+                >
+                </div>
+                <div
+                    class="absolute bottom-0 right-1/4 w-64 h-64 bg-tertiary/10 rounded-full blur-3xl"
+                >
+                </div>
+            </div>
+
+            <div class="relative z-10 w-full max-w-2xl">
+                <div class="text-center mb-8">
+                    <div class="inline-block relative group">
+                        <h1
+                            class="text-3xl font-bold text-slate-800 tracking-wide"
+                        >
+                            Expeditions <span class="text-secondary">Group</span
+                            >
+                        </h1>
+                    </div>
+                </div>
+
+                <VoucherForm client:load />
+
+                <div class="text-center mt-8">
+                    <div class="text-slate-400 text-sm">
+                        &copy; 2026 Expeditions Group
+                    </div>
+                </div>
+            </div>
+        </main>
+    </body>
+</html>

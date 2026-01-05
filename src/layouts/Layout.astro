@@ -1,22 +1,143 @@
+---
+import "../styles/global.css";
+import Navbar from "../components/Navbar.jsx";
+import Footer from "../components/Footer.jsx";
+
+interface Props {
+	title: string;
+	description?: string;
+	image?: string;
+	showNavbar?: boolean;
+	showFooter?: boolean;
+}
+
+const {
+	title,
+	description = "Expeditions Group - Tu agencia de viajes de confianza para turismo escolar, corporativo y familiar.",
+	image = "/og-image.png",
+	showNavbar = true,
+	showFooter = true,
+} = Astro.props;
+
+const canonicalURL = new URL(
+	Astro.url.pathname,
+	Astro.site || "https://www.expeditionsgroup.com",
+);
+const socialImageURL = new URL(image, Astro.url);
+---
+
 <!doctype html>
-<html lang="en">
+<html lang="es">
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
+
+		<!-- SEO Principal -->
+		<title>{title}</title>
+		<meta name="title" content={title} />
+		<meta name="description" content={description} />
+		<link rel="canonical" href={canonicalURL} />
+
+		<!-- Open Graph / Facebook -->
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content={canonicalURL} />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:image" content={socialImageURL} />
+
+		<!-- Twitter -->
+		<meta property="twitter:card" content="summary_large_image" />
+		<meta property="twitter:url" content={canonicalURL} />
+		<meta property="twitter:title" content={title} />
+		<meta property="twitter:description" content={description} />
+		<meta property="twitter:image" content={socialImageURL} />
+
+		<!-- Favicon -->
+		<link rel="icon" href="/favicon.ico" type="image/x-icon" />
+		<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+		<link
+			rel="apple-touch-icon"
+			sizes="180x180"
+			href="/apple-touch-icon.png"
+		/>
+		<link
+			rel="icon"
+			type="image/png"
+			sizes="32x32"
+			href="/favicon-32x32.png"
+		/>
+		<link
+			rel="icon"
+			type="image/png"
+			sizes="16x16"
+			href="/favicon-16x16.png"
+		/>
+		<link rel="manifest" href="/site.webmanifest" />
+
+		<!-- JSON-LD Structured Data (Organization) -->
+		<script type="application/ld+json" is:inline>
+			{
+				"@context": "https://schema.org",
+				"@type": "TravelAgency",
+				"name": "Expeditions Group",
+				"image": "https://www.expeditionsgroup.com/logo.png",
+				"@id": "https://www.expeditionsgroup.com",
+				"url": "https://www.expeditionsgroup.com",
+				"telephone": "+51999999999",
+				"address": {
+					"@type": "PostalAddress",
+					"streetAddress": "Av. La Paz 123",
+					"addressLocality": "Miraflores",
+					"addressRegion": "Lima",
+					"postalCode": "15074",
+					"addressCountry": "PE"
+				},
+				"description": "Agencia de viajes especializada en turismo escolar, corporativo y familiar. Paquetes nacionales e internacionales todo incluido."
+			}
+		</script>
+
+		<!-- Accesibilidad y mejoras UX -->
+		<meta name="theme-color" content="#0f172a" />
 	</head>
-	<body>
+	<body class="bg-light text-accent overflow-x-hidden">
+		<!-- Preloader -->
+		<div
+			id="preloader"
+			class="fixed inset-0 z-[9999] flex items-center justify-center bg-white transition-opacity duration-500"
+		>
+			<div class="flex flex-col items-center gap-4">
+				<div
+					class="w-16 h-16 border-4 border-slate-100 border-t-[#0081C9] rounded-full animate-spin"
+				>
+				</div>
+				<div class="flex flex-col items-center">
+					<span
+						class="text-slate-800 font-bold text-lg tracking-widest"
+						>EXPEDITIONS</span
+					>
+					<span
+						class="text-[#0081C9] text-xs font-semibold tracking-[0.3em]"
+						>GROUP</span
+					>
+				</div>
+			</div>
+		</div>
+
+		<script>
+			window.addEventListener("load", () => {
+				const preloader = document.getElementById("preloader");
+				if (preloader) {
+					preloader.style.opacity = "0";
+					setTimeout(() => {
+						preloader.style.display = "none";
+					}, 500);
+				}
+			});
+		</script>
+
+		{showNavbar && <Navbar client:load />}
 		<slot />
+		{showFooter && <Footer client:visible />}
 	</body>
 </html>
-
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
-</style>

@@ -1,0 +1,22 @@
+---
+import Layout from "../layouts/Layout.astro";
+import PageHeader from "../components/PageHeader";
+import AboutContent from "../components/AboutContent";
+
+// Reusing an asset for the background
+import heroBg from "../assets/about.avif?url";
+---
+
+<Layout title="Nosotros | Expeditions Group">
+    <main class="bg-gray-50 min-h-screen">
+        {/* Header - Compact */}
+        <PageHeader
+            title="Sobre Nosotros"
+            subtitle="Expertos en crear experiencias inolvidables para grupos corporativos y educativos."
+            image={heroBg}
+            client:load
+        />
+
+        <AboutContent client:visible image={heroBg} />
+    </main>
+</Layout>

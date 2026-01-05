@@ -1,0 +1,21 @@
+---
+import Layout from "../layouts/Layout.astro";
+import PageHeader from "../components/PageHeader.jsx";
+import ContactContent from "../components/ContactContent.jsx";
+
+// Using a reusable asset for consistency, or update if a specific contact image is available
+import heroBg from "../assets/about.avif?url";
+---
+
+<Layout title="Contáctanos | Expeditions Group">
+    <main class="bg-gray-50 min-h-screen">
+        <PageHeader
+            title="Contáctanos"
+            subtitle="Estamos aquí para planificar tu próxima gran aventura. ¡Escríbenos hoy!"
+            image={heroBg}
+            client:load
+        />
+
+        <ContactContent client:visible />
+    </main>
+</Layout>

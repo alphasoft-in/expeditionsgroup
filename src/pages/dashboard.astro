@@ -1,0 +1,13 @@
+---
+import Layout from "../layouts/Layout.astro";
+import DashboardComponent from "../components/Dashboard.jsx";
+---
+
+<Layout
+    title="Dashboard | Expeditions Group"
+    description="Panel de control para usuarios registrados."
+    showNavbar={false}
+    showFooter={false}
+>
+    <DashboardComponent client:only="react" />
+</Layout>
