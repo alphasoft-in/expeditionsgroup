@@ -51,7 +51,7 @@ export default function Hero() {
 
     return (
         <div className="relative w-full h-screen overflow-hidden bg-black">
-            <AnimatePresence> {/* Removed mode="wait" for simultaneous cross-fade */}
+            <AnimatePresence>
                 <motion.div
                     key={current}
                     initial={{ opacity: 0 }}
@@ -60,7 +60,6 @@ export default function Hero() {
                     transition={{ duration: 1.5 }}
                     className="absolute inset-0"
                 >
-                    {/* Background Image with Ken Burns Effect */}
                     <motion.div
                         initial={{ scale: 1.1 }}
                         animate={{ scale: 1 }}
@@ -68,21 +67,16 @@ export default function Hero() {
                         className="absolute inset-0 bg-cover bg-center"
                         style={{ backgroundImage: `url(${slides[current].image})` }}
                     />
-
-                    {/* Improved Overlay: Lighter but legible */}
-                    {/* 1. Base dark tint, much lighter than before */}
-                    <div className="absolute inset-0 bg-black/20" />
-
-                    {/* 2. Top gradient for Navbar visibility */}
-                    <div className="absolute top-0 left-0 right-0 h-40 bg-gradient-to-b from-primary/70 to-transparent" />
-
-                    {/* 3. Bottom gradient for Text legibility */}
-                    <div className="absolute bottom-0 left-0 right-0 h-2/3 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
-
-                    {/* 4. Subtle brand tint */}
-                    <div className="absolute inset-0 bg-primary/10 mix-blend-overlay" />
                 </motion.div>
             </AnimatePresence>
+
+            {/* Static Overlays - Outside AnimatePresence to prevent flicker/ghosting */}
+            <div className="absolute inset-0 pointer-events-none">
+                <div className="absolute inset-0 bg-black/20" />
+                <div className="absolute top-0 left-0 right-0 h-40 bg-gradient-to-b from-primary/70 to-transparent" />
+                <div className="absolute bottom-0 left-0 right-0 h-2/3 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
+                <div className="absolute inset-0 bg-primary/10 mix-blend-overlay" />
+            </div>
 
             {/* Content */}
             <div className="relative z-10 flex flex-col items-center justify-center h-full text-center px-8">
