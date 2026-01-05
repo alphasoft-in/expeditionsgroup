@@ -14,7 +14,7 @@ export default function AboutContent({ image }) {
                     <span className="text-secondary font-bold tracking-widest uppercase text-sm mb-3 block">
                         ¿Quiénes somos?
                     </span>
-                    <h2 className="text-2xl sm:text-4xl md:text-5xl font-bold text-slate-900 mb-6 sm:mb-8 leading-tight">
+                    <h2 className="text-xl sm:text-4xl md:text-5xl font-bold text-slate-900 mb-6 sm:mb-8 leading-tight">
                         Experiencias que <br className="hidden sm:block" />
                         <span className="text-primary">Transforman</span>
                     </h2>

@@ -18,7 +18,7 @@ export default function ContactContent() {
                         <span className="text-secondary font-bold tracking-widest uppercase text-xs mb-3 block pl-1">
                             Contáctanos
                         </span>
-                        <h2 className="text-2xl sm:text-5xl font-bold text-slate-900 mb-6 leading-tight">
+                        <h2 className="text-xl sm:text-5xl font-bold text-slate-900 mb-6 leading-tight">
                             Estamos para <br className="hidden sm:block" />
                             <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">Ayudarte</span>
                         </h2>
