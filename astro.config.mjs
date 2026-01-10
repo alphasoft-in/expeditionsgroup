@@ -7,7 +7,7 @@ import vercel from '@astrojs/vercel/static';
 
 // https://astro.build/config
 export default defineConfig({
-    site: 'https://www.expeditionsgroup.com',
+    site: 'https://www.expeditionsgroupsac.com',
     integrations: [react(), tailwind(), sitemap()],
     output: 'static',
     adapter: vercel({}),
