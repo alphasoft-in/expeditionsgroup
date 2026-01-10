@@ -90,6 +90,7 @@ export default function Navbar({ logo, logoWidth, logoHeight }) {
                             alt="Expeditions Group Logo"
                             width={logoWidth}
                             height={logoHeight}
+                            fetchPriority="high"
                             className="h-12 md:h-14 lg:h-16 w-auto object-contain"
                         />
                     </a>
