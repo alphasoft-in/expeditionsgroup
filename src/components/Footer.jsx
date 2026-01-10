@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function Footer({ logo }) {
+export default function Footer({ logo, logoWidth, logoHeight }) {
     return (
         <footer className="bg-primary text-white pt-16 pb-8 border-t border-white/10">
             <div className="container mx-auto px-6">
@@ -11,6 +11,8 @@ export default function Footer({ logo }) {
                             <img
                                 src={logo}
                                 alt="Expeditions Group Logo"
+                                width={logoWidth}
+                                height={logoHeight}
                                 className="h-14 w-auto object-contain"
                             />
                         </a>

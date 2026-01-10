@@ -150,9 +150,27 @@ const socialImageURL = new URL(image, Astro.url);
 		}
 	</head>
 	<body class="bg-light text-accent overflow-x-hidden">
-		{showNavbar && <Navbar client:load logo={optimizedLogo.src} />}
+		{
+			showNavbar && (
+				<Navbar
+					client:load
+					logo={optimizedLogo.src}
+					logoWidth={optimizedLogo.attributes.width}
+					logoHeight={optimizedLogo.attributes.height}
+				/>
+			)
+		}
 		<slot />
-		{showFooter && <Footer client:visible logo={optimizedLogo.src} />}
+		{
+			showFooter && (
+				<Footer
+					client:visible
+					logo={optimizedLogo.src}
+					logoWidth={optimizedLogo.attributes.width}
+					logoHeight={optimizedLogo.attributes.height}
+				/>
+			)
+		}
 		{showWhatsApp && <WhatsAppButton client:idle />}
 	</body>
 </html>

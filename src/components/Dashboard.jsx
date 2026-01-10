@@ -8,7 +8,7 @@ import DashboardCharts from './DashboardCharts';
 
 
 
-export default function Dashboard({ logo }) {
+export default function Dashboard({ logo, logoWidth, logoHeight }) {
     const [operations, setOperations] = useState([]);
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
@@ -450,6 +450,8 @@ export default function Dashboard({ logo }) {
                         <img
                             src={logo}
                             alt="Expeditions Group Logo"
+                            width={logoWidth}
+                            height={logoHeight}
                             className="h-10 w-auto object-contain"
                         />
                         <div className="hidden sm:block h-6 w-[1px] bg-slate-200"></div>

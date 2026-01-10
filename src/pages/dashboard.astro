@@ -19,5 +19,10 @@ const optimizedLogo = await getImage({
     showFooter={false}
     showWhatsApp={false}
 >
-    <DashboardComponent client:only="react" logo={optimizedLogo.src} />
+    <DashboardComponent
+        client:only="react"
+        logo={optimizedLogo.src}
+        logoWidth={optimizedLogo.attributes.width}
+        logoHeight={optimizedLogo.attributes.height}
+    />
 </Layout>

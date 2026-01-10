@@ -31,7 +31,7 @@ const links = [
     { name: 'INTRANET', href: '/login', isButton: true, target: '_blank' },
 ];
 
-export default function Navbar({ logo }) {
+export default function Navbar({ logo, logoWidth, logoHeight }) {
     const [isScrolled, setIsScrolled] = React.useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
     const [activeLink, setActiveLink] = React.useState('/');
@@ -88,6 +88,8 @@ export default function Navbar({ logo }) {
                         <img
                             src={logo}
                             alt="Expeditions Group Logo"
+                            width={logoWidth}
+                            height={logoHeight}
                             className="h-12 md:h-14 lg:h-16 w-auto object-contain"
                         />
                     </a>
