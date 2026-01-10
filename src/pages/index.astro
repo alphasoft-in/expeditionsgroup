@@ -51,14 +51,14 @@ const slides = await Promise.all(
 			src: slide.image,
 			format: "avif",
 			width: 1920, // Ensure high quality for Hero Desktop
-			quality: 80,
+			quality: 70,
 		});
 
 		const optimizedImageMobile = await getImage({
 			src: slide.image,
 			format: "avif",
 			width: 750, // Mobile optimized width
-			quality: 70, // Slightly lower quality for lighter mobile load
+			quality: 60, // Slightly lower quality for lighter mobile load
 		});
 
 		return {
@@ -77,7 +77,7 @@ const optimizedPackages = await Promise.all(
 			src: pkg.image,
 			format: "avif", // Convert to AVIF
 			width: 600,
-			quality: 80,
+			quality: 60,
 		});
 
 		// Optimize itinerary images if they exist
@@ -89,7 +89,7 @@ const optimizedPackages = await Promise.all(
 								src: item.image,
 								format: "avif",
 								width: 600,
-								quality: 80,
+								quality: 60,
 							});
 							return { ...item, image: itemImg.src };
 						}
