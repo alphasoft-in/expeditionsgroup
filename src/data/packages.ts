@@ -25,6 +25,8 @@ import surMagicoImg from '../assets/paquetes/sur-magico-dunas.avif';
 import surMagicoHeaderImg from '../assets/breadcrumb/sur-magico.avif';
 import boliviaImg from '../assets/paquetes/bolivia.avif';
 
+
+// Export package data
 export const packages = [
     {
         id: 1,

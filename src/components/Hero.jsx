@@ -13,7 +13,7 @@ export default function Hero({ slides }) {
 
     return (
         <div className="relative w-full h-screen overflow-hidden bg-black">
-            <AnimatePresence>
+            <AnimatePresence initial={false}>
                 <motion.div
                     key={current}
                     initial={{ opacity: 0 }}
@@ -28,13 +28,21 @@ export default function Hero({ slides }) {
                         transition={{ duration: 6, ease: "easeOut" }}
                         className="absolute inset-0"
                     >
-                        <img
-                            src={slides[current].image.src || slides[current].image}
-                            alt={slides[current].title}
-                            className="w-full h-full object-cover"
-                            fetchpriority={current === 0 ? "high" : "auto"}
-                            loading={current === 0 ? "eager" : "lazy"}
-                        />
+                        <picture>
+                            {slides[current].imageMobile && (
+                                <source
+                                    media="(max-width: 768px)"
+                                    srcSet={slides[current].imageMobile}
+                                />
+                            )}
+                            <img
+                                src={slides[current].image.src || slides[current].image}
+                                alt={slides[current].title}
+                                className="w-full h-full object-cover"
+                                fetchPriority={current === 0 ? "high" : "auto"}
+                                loading={current === 0 ? "eager" : "lazy"}
+                            />
+                        </picture>
                     </motion.div>
                 </motion.div>
             </AnimatePresence>

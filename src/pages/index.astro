@@ -50,12 +50,21 @@ const slides = await Promise.all(
 		const optimizedImage = await getImage({
 			src: slide.image,
 			format: "avif",
-			width: 1920, // Ensure high quality for Hero
+			width: 1920, // Ensure high quality for Hero Desktop
 			quality: 80,
 		});
+
+		const optimizedImageMobile = await getImage({
+			src: slide.image,
+			format: "avif",
+			width: 750, // Mobile optimized width
+			quality: 70, // Slightly lower quality for lighter mobile load
+		});
+
 		return {
 			...slide,
 			image: optimizedImage.src,
+			imageMobile: optimizedImageMobile.src,
 		};
 	}),
 );
@@ -66,7 +75,7 @@ const optimizedPackages = await Promise.all(
 	packages.map(async (pkg) => {
 		const optimizedImage = await getImage({
 			src: pkg.image,
-			format: "avif",
+			format: "avif", // Convert to AVIF
 			width: 600,
 			quality: 80,
 		});
@@ -98,9 +107,12 @@ const optimizedPackages = await Promise.all(
 );
 ---
 
-<Layout title="Expeditions Group | Viajes y Aventura">
+<Layout
+	title="Expeditions Group | Viajes y Aventura"
+	preloadImage={slides[0].image}
+>
 	<main>
-		<Hero client:only="react" slides={slides} />
+		<Hero client:load slides={slides} />
 		<RecommendedPackages client:load packages={optimizedPackages} />
 	</main>
 </Layout>

@@ -23,7 +23,7 @@ export default function PageHeader({ title, subtitle, image, className = "" }) {
                         alt={title}
                         className="w-full h-full object-cover object-center"
                         loading="eager"
-                        fetchpriority="high"
+                        fetchPriority="high"
                     />
                 </motion.div>
 

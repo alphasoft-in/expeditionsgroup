@@ -17,6 +17,7 @@ interface Props {
 	title: string;
 	description?: string;
 	image?: string;
+	preloadImage?: string;
 	showNavbar?: boolean;
 	showFooter?: boolean;
 	showWhatsApp?: boolean;
@@ -26,6 +27,7 @@ const {
 	title,
 	description = "Expeditions Group - Tu agencia de viajes de confianza para turismo escolar, corporativo y familiar.",
 	image = "/og-image.png",
+	preloadImage,
 	showNavbar = true,
 	showFooter = true,
 	showWhatsApp = true,
@@ -117,6 +119,7 @@ const socialImageURL = new URL(image, Astro.url);
 		<meta name="theme-color" content="#0f172a" />
 
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		{preloadImage && <link rel="preload" as="image" href={preloadImage} />}
 	</head>
 	<body class="bg-light text-accent overflow-x-hidden">
 		{showNavbar && <Navbar client:load logo={optimizedLogo.src} />}
