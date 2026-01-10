@@ -4,12 +4,21 @@ import Navbar from "../components/Navbar.jsx";
 import Footer from "../components/Footer.jsx";
 import WhatsAppButton from "../components/WhatsAppButton.jsx";
 import logo from "../assets/nuevo-logo.avif";
+import aboutImage from "../assets/about.avif";
 import { getImage } from "astro:assets";
 
 const optimizedLogo = await getImage({
 	src: logo,
 	width: 300,
 	quality: 70,
+});
+
+const optimizedAbout = await getImage({
+	src: aboutImage,
+	format: "jpeg",
+	width: 1200,
+	height: 630,
+	quality: 80,
 });
 
 interface Props {
@@ -26,7 +35,7 @@ interface Props {
 const {
 	title,
 	description = "Expeditions Group - Tu agencia de viajes de confianza para turismo escolar, corporativo y familiar.",
-	image = "/og-image.png",
+	image = optimizedAbout.src,
 	preloadImage,
 	preloadImageMobile,
 	showNavbar = true,
@@ -36,9 +45,10 @@ const {
 
 const canonicalURL = new URL(
 	Astro.url.pathname,
-	Astro.site || "https://www.expeditionsgroup.com",
+	Astro.site || "https://www.expeditionsgroupsac.com",
 );
 const socialImageURL = new URL(image, Astro.url);
+const logoURL = new URL(optimizedLogo.src, Astro.url);
 ---
 
 <!doctype html>
@@ -95,18 +105,18 @@ const socialImageURL = new URL(image, Astro.url);
 		/>
 
 		<!-- JSON-LD Structured Data (Organization) -->
-		<script type="application/ld+json" is:inline>
+		<script type="application/ld+json" is:inline define:vars={{ logoURL: logoURL.href }}>
 			{
 				"@context": "https://schema.org",
 				"@type": "TravelAgency",
 				"name": "Expeditions Group",
-				"image": "https://www.expeditionsgroup.com/logo.avif",
-				"@id": "https://www.expeditionsgroup.com",
-				"url": "https://www.expeditionsgroup.com",
-				"telephone": "+51999999999",
+				"image": logoURL,
+				"@id": "https://www.expeditionsgroupsac.com",
+				"url": "https://www.expeditionsgroupsac.com",
+				"telephone": "+51996667974",
 				"address": {
 					"@type": "PostalAddress",
-					"streetAddress": "Av. La Paz 123",
+					"streetAddress": "Av. Larco 345 oficina S1",
 					"addressLocality": "Miraflores",
 					"addressRegion": "Lima",
 					"postalCode": "15074",
