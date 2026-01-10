@@ -4,21 +4,12 @@ import Navbar from "../components/Navbar.jsx";
 import Footer from "../components/Footer.jsx";
 import WhatsAppButton from "../components/WhatsAppButton.jsx";
 import logo from "../assets/nuevo-logo.avif";
-import aboutImage from "../assets/about.avif";
 import { getImage } from "astro:assets";
 
 const optimizedLogo = await getImage({
 	src: logo,
 	width: 300,
 	quality: 70,
-});
-
-const optimizedAbout = await getImage({
-	src: aboutImage,
-	format: "jpeg",
-	width: 1200,
-	height: 630,
-	quality: 80,
 });
 
 interface Props {
@@ -35,7 +26,7 @@ interface Props {
 const {
 	title,
 	description = "Expeditions Group - Tu agencia de viajes de confianza para turismo escolar, corporativo y familiar.",
-	image = optimizedAbout.src,
+	image = "/about.avif",
 	preloadImage,
 	preloadImageMobile,
 	showNavbar = true,
