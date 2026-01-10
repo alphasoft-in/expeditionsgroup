@@ -1,12 +1,106 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import { getImage } from "astro:assets";
 import Hero from "../components/Hero.jsx";
 import RecommendedPackages from "../components/RecommendedPackages.jsx";
+
+// Import images for Hero
+import royalDecameronImg from "../assets/slides/royal-decameron.png";
+import cuscoMagicoImg from "../assets/slides/cusco-magico.png";
+import puntaCanaImg from "../assets/slides/punta-cana.png";
+import sanAndresImg from "../assets/slides/san-andres.png";
+import cartagenaDeIndiasImg from "../assets/slides/cartagena-de-indias.png";
+
+const slidesData = [
+	{
+		id: 1,
+		title: "Royal Decameron",
+		subtitle: "Todo incluido para tu relajación total",
+		image: royalDecameronImg,
+	},
+	{
+		id: 2,
+		title: "Cusco Mágico",
+		subtitle: "Descubre la historia de los Incas",
+		image: cuscoMagicoImg,
+	},
+	{
+		id: 3,
+		title: "Punta Cana",
+		subtitle: "El paraíso en República Dominicana",
+		image: puntaCanaImg,
+	},
+	{
+		id: 4,
+		title: "San Andrés",
+		subtitle: "El mar de los siete colores te espera",
+		image: sanAndresImg,
+	},
+	{
+		id: 5,
+		title: "Cartagena de Indias",
+		subtitle: "Encanto colonial y brisa marina",
+		image: cartagenaDeIndiasImg,
+	},
+];
+
+// Optimize images to AVIF
+const slides = await Promise.all(
+	slidesData.map(async (slide) => {
+		const optimizedImage = await getImage({
+			src: slide.image,
+			format: "avif",
+			width: 1920, // Ensure high quality for Hero
+			quality: 80,
+		});
+		return {
+			...slide,
+			image: optimizedImage.src,
+		};
+	}),
+);
+
+import { packages } from "../data/packages";
+
+const optimizedPackages = await Promise.all(
+	packages.map(async (pkg) => {
+		const optimizedImage = await getImage({
+			src: pkg.image,
+			format: "avif",
+			width: 600,
+			quality: 80,
+		});
+
+		// Optimize itinerary images if they exist
+		const optimizedItinerary = pkg.itinerary
+			? await Promise.all(
+					pkg.itinerary.map(async (item) => {
+						if (item.image) {
+							const itemImg = await getImage({
+								src: item.image,
+								format: "avif",
+								width: 600,
+								quality: 80,
+							});
+							return { ...item, image: itemImg.src };
+						}
+						return item;
+					}),
+				)
+			: [];
+
+		return {
+			...pkg,
+			image: optimizedImage.src,
+			itinerary: optimizedItinerary,
+		};
+	}),
+);
 ---
 
 <Layout title="Expeditions Group | Viajes y Aventura">
 	<main>
-		<Hero client:only="react" />
-		<RecommendedPackages client:load />
+		<Hero client:only="react" slides={slides} />
+		<RecommendedPackages client:load packages={optimizedPackages} />
 	</main>
 </Layout>

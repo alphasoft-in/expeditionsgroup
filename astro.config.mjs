@@ -11,4 +11,10 @@ export default defineConfig({
     integrations: [react(), tailwind(), sitemap()],
     output: 'static',
     adapter: vercel({}),
+    image: {
+        domains: ["images.unsplash.com"],
+        service: {
+            entrypoint: 'astro/assets/services/sharp',
+        }
+    }
 });

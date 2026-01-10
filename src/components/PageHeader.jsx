@@ -19,9 +19,11 @@ export default function PageHeader({ title, subtitle, image, className = "" }) {
                     style={{ backfaceVisibility: 'hidden', transform: 'translateZ(0)' }}
                 >
                     <img
-                        src={image}
+                        src={image?.src || image}
                         alt={title}
                         className="w-full h-full object-cover object-center"
+                        loading="eager"
+                        fetchpriority="high"
                     />
                 </motion.div>
 
@@ -47,7 +49,7 @@ export default function PageHeader({ title, subtitle, image, className = "" }) {
                     transition={{ duration: 0.8, ease: "easeOut" }}
                     className="flex flex-col items-center"
                 >
-                    <h1 className="text-xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-white via-white to-secondary mb-3 sm:mb-4 drop-shadow-2xl tracking-tight px-2 pb-2">
+                    <h1 className="text-xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-3 sm:mb-4 drop-shadow-2xl tracking-tight px-2 pb-2">
                         {title}
                     </h1>
                     {subtitle && (

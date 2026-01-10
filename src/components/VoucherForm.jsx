@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { supabase } from '../lib/supabase';
 
 // Helper to render Input
-const RenderInput = ({ label, name, type = "text", placeholder, required = true, width = "full", formData, onChange }) => (
+const RenderInput = ({ label, name, type = "text", placeholder, required = true, width = "full", formData, onChange, isUppercase = false, isLowercase = false }) => (
     <div className={width === "half" ? "" : "col-span-1 md:col-span-2"}>
         <label htmlFor={name} className="block text-sm font-medium text-slate-700 mb-2">
             {label}
@@ -13,9 +13,16 @@ const RenderInput = ({ label, name, type = "text", placeholder, required = true,
             id={name}
             name={name}
             value={formData[name] || ''}
-            onChange={onChange}
+            onChange={(e) => {
+                if (isUppercase) {
+                    e.target.value = e.target.value.toUpperCase();
+                } else if (isLowercase) {
+                    e.target.value = e.target.value.toLowerCase();
+                }
+                onChange(e);
+            }}
             onWheel={(e) => type === 'number' && e.target.blur()}
-            className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-secondary focus:ring-2 focus:ring-secondary/20 outline-none transition-all duration-200 bg-slate-50 focus:bg-white text-base"
+            className={`w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-secondary focus:ring-2 focus:ring-secondary/20 outline-none transition-all duration-200 bg-slate-50 focus:bg-white text-base ${isUppercase ? 'uppercase placeholder:normal-case' : ''} ${isLowercase ? 'lowercase' : ''}`}
             placeholder={placeholder}
             required={required}
         />
@@ -34,7 +41,7 @@ const RenderSelect = ({ label, name, options, required = true, width = "full", f
                 name={name}
                 value={formData[name] || ''}
                 onChange={onChange}
-                className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-secondary focus:ring-2 focus:ring-secondary/20 outline-none transition-all duration-200 bg-slate-50 focus:bg-white appearance-none cursor-pointer text-base"
+                className="w-full pl-4 pr-10 py-3 rounded-xl border border-slate-200 focus:border-secondary focus:ring-2 focus:ring-secondary/20 outline-none transition-all duration-200 bg-slate-50 focus:bg-white appearance-none cursor-pointer text-base"
                 required={required}
             >
                 <option value="" disabled>Seleccione una opción</option>
@@ -61,7 +68,7 @@ function PaymentInfoSection({ formData, onChange, stepNumber = "2" }) {
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <RenderInput label="Fecha de Operación" name="paymentDate" type="date" width="half" formData={formData} onChange={onChange} />
-                <RenderInput label="Número de Operación" name="operationNumber" width="half" placeholder="Ej. 123456" formData={formData} onChange={onChange} />
+                <RenderInput label="Número de Operación" name="operationNumber" width="half" placeholder="Ej. 123456" formData={formData} onChange={onChange} isUppercase={true} />
                 <RenderInput label="Monto del Depósito" name="amount" type="number" width="half" placeholder="0.00" formData={formData} onChange={onChange} />
                 <RenderSelect label="Moneda" name="currency" width="half" options={["Soles (PEN)", "Dólares (USD)"]} formData={formData} onChange={onChange} />
                 <RenderSelect label="Método de pago" name="paymentMethod" width="half" options={["Depósito en Cuenta", "Transferencia Bancaria", "Transferencia interbancaria", "Tarjeta de Crédito"]} formData={formData} onChange={onChange} />
@@ -79,7 +86,7 @@ function PaymentHolderSection({ formData, onChange, stepNumber = "3" }) {
                 Titular del Pago
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <RenderInput label="Nombres y Apellidos del Titular" name="paymentHolderName" placeholder="Tal cual figura en el voucher" formData={formData} onChange={onChange} />
+                <RenderInput label="Nombres y Apellidos del Titular" name="paymentHolderName" placeholder="Tal cual figura en el voucher" formData={formData} onChange={onChange} isUppercase={true} />
             </div>
         </section>
     );
@@ -237,11 +244,11 @@ export default function VoucherForm() {
                                         Datos del Alumno
                                     </h3>
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
-                                        <RenderInput label="Nombres y Apellidos del Alumno" name="studentName" placeholder="Juan Pérez" formData={formData} onChange={handleInputChange} />
+                                        <RenderInput label="Nombres y Apellidos del Alumno" name="studentName" placeholder="Juan Pérez" formData={formData} onChange={handleInputChange} isUppercase={true} />
                                         <RenderInput label="Número de Documento" name="studentDoc" width="half" placeholder="12345678" formData={formData} onChange={handleInputChange} />
-                                        <RenderInput label="Grupo / Colegio / Promoción" name="groupName" width="half" placeholder="Ej. Promoción 2026" formData={formData} onChange={handleInputChange} />
+                                        <RenderInput label="Grupo / Colegio / Promoción" name="groupName" width="half" placeholder="Ej. Promoción 2026" formData={formData} onChange={handleInputChange} isUppercase={true} />
                                         <RenderInput label="Teléfono del Apoderado" name="parentPhone" type="tel" width="half" placeholder="999 999 999" formData={formData} onChange={handleInputChange} />
-                                        <RenderInput label="Correo del Apoderado" name="parentEmail" type="email" width="half" placeholder="correo@ejemplo.com" formData={formData} onChange={handleInputChange} />
+                                        <RenderInput label="Correo del Apoderado" name="parentEmail" type="email" width="half" placeholder="correo@ejemplo.com" formData={formData} onChange={handleInputChange} isLowercase={true} />
                                     </div>
                                 </section>
 
@@ -270,10 +277,10 @@ export default function VoucherForm() {
                                         Datos del Cliente
                                     </h3>
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
-                                        <RenderInput label="Nombres y Apellidos" name="clientName" placeholder="Maria Rodriguez" formData={formData} onChange={handleInputChange} />
+                                        <RenderInput label="Nombres y Apellidos del Cliente" name="clientName" placeholder="Maria Rodriguez" formData={formData} onChange={handleInputChange} isUppercase={true} />
                                         <RenderInput label="Número de Documento" name="clientDoc" width="half" placeholder="12345678" formData={formData} onChange={handleInputChange} />
                                         <RenderInput label="Teléfono / Whatsapp" name="clientPhone" type="tel" width="half" placeholder="999 999 999" formData={formData} onChange={handleInputChange} />
-                                        <RenderInput label="Correo electrónico" name="clientEmail" type="email" width="full" placeholder="correo@ejemplo.com" formData={formData} onChange={handleInputChange} />
+                                        <RenderInput label="Correo electrónico" name="clientEmail" type="email" width="full" placeholder="correo@ejemplo.com" formData={formData} onChange={handleInputChange} isLowercase={true} />
                                     </div>
                                 </section>
 
@@ -284,7 +291,7 @@ export default function VoucherForm() {
                                         Información del Viaje
                                     </h3>
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
-                                        <RenderInput label="Destino del viaje" name="tripDestination" placeholder="Ej. Punta Cana" formData={formData} onChange={handleInputChange} />
+                                        <RenderInput label="Destino del viaje" name="tripDestination" placeholder="Ej. Punta Cana" formData={formData} onChange={handleInputChange} isUppercase={true} />
                                         <RenderInput label="Fecha del viaje" name="tripDate" type="date" width="half" formData={formData} onChange={handleInputChange} />
                                         <RenderInput label="Cantidad de Adultos" name="adultsCount" type="number" width="half" placeholder="2" formData={formData} onChange={handleInputChange} />
                                         <RenderInput label="Cantidad de Niños" name="childrenCount" type="number" width="half" placeholder="0" required={false} formData={formData} onChange={handleInputChange} />
@@ -340,6 +347,7 @@ export default function VoucherForm() {
 
                     {formData.serviceType && (
                         <motion.button
+                            id="voucher-submit-btn"
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.5, ease: "easeOut", delay: 0.5 }}

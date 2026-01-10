@@ -23,7 +23,7 @@ export default function Breadcrumb({ items }) {
                                     {item.label}
                                 </a>
                             ) : (
-                                <span className="ml-1 text-sm font-medium text-secondary md:ml-2">
+                                <span className="ml-1 text-sm font-bold text-primary md:ml-2">
                                     {item.label}
                                 </span>
                             )}

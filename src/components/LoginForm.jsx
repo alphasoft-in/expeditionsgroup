@@ -87,14 +87,10 @@ export default function LoginForm() {
                             placeholder="••••••••"
                             required
                         />
-                        <div className="flex justify-end mt-2">
-                            <a href="#" className="text-sm text-secondary hover:text-secondary/80 font-medium transition-colors">
-                                ¿Olvidaste tu contraseña?
-                            </a>
-                        </div>
                     </div>
 
                     <motion.button
+                        id="login-submit-btn"
                         whileHover={{ scale: 1.02 }}
                         whileTap={{ scale: 0.98 }}
                         type="submit"

@@ -1,0 +1,30 @@
+---
+import Layout from "../layouts/Layout.astro";
+import PageHeader from "../components/PageHeader";
+import TermsContent from "../components/TermsContent";
+
+// Reusing an asset for the background to maintain consistency
+import heroBg from "../assets/about.avif";
+import { getImage } from "astro:assets";
+
+const optimizedHeroBg = await getImage({
+    src: heroBg,
+    format: "avif",
+    width: 1920,
+    quality: 80,
+});
+---
+
+<Layout title="Términos y Condiciones | Expeditions Group">
+    <main class="bg-gray-50 min-h-screen">
+        {/* Header - Compact */}
+        <PageHeader
+            title="Términos y Condiciones"
+            subtitle="Políticas claras para garantizar la mejor experiencia de viaje."
+            image={optimizedHeroBg.src}
+            client:load
+        />
+
+        <TermsContent client:visible />
+    </main>
+</Layout>

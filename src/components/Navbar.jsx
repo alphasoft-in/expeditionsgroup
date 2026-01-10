@@ -6,7 +6,7 @@ const links = [
     { name: 'Nosotros', href: '/nosotros' },
     {
         name: 'Paquetes Internacionales',
-        href: '#',
+        href: '/#paquetes',
         children: [
             { name: 'Punta Cana', href: '/paquetes/punta-cana' },
             { name: 'Riviera Maya', href: '/paquetes/riviera-maya' },
@@ -16,7 +16,7 @@ const links = [
     },
     {
         name: 'Paquetes Nacionales',
-        href: '#',
+        href: '/#paquetes',
         children: [
             { name: 'Royal Decameron', href: '/paquetes/royal-decameron' },
             { name: 'Cusco Mágico', href: '/paquetes/cusco-magico' },
@@ -28,18 +28,18 @@ const links = [
     },
     { name: 'Contáctanos', href: '/contactanos' },
     { name: 'Registro de Pagos', href: '/registro', target: '_blank' },
-    { name: 'Login', href: '/login', isButton: true, target: '_blank' },
+    { name: 'INTRANET', href: '/login', isButton: true, target: '_blank' },
 ];
 
-export default function Navbar() {
-    const [isScrolled, setIsScrolled] = useState(false);
-    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-    const [activeLink, setActiveLink] = useState('/');
-    const [hoveredLink, setHoveredLink] = useState(null);
-    const [mobileExpandedLink, setMobileExpandedLink] = useState(null);
+export default function Navbar({ logo }) {
+    const [isScrolled, setIsScrolled] = React.useState(false);
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
+    const [activeLink, setActiveLink] = React.useState('/');
+    const [hoveredLink, setHoveredLink] = React.useState(null);
+    const [mobileExpandedLink, setMobileExpandedLink] = React.useState(null);
 
     // Lock body scroll when menu is open
-    useEffect(() => {
+    React.useEffect(() => {
         if (isMobileMenuOpen) {
             document.body.style.overflow = 'hidden';
         } else {
@@ -47,7 +47,7 @@ export default function Navbar() {
         }
     }, [isMobileMenuOpen]);
 
-    useEffect(() => {
+    React.useEffect(() => {
         const handleScroll = () => {
             setIsScrolled(window.scrollY > 10);
         };
@@ -84,8 +84,12 @@ export default function Navbar() {
             >
                 <div className="container mx-auto px-6 flex items-center justify-between">
                     {/* Logo */}
-                    <a href="/" className="text-2xl font-bold text-white tracking-wide group relative z-50">
-                        Expeditions <span className="text-secondary drop-shadow-[0_0_10px_rgba(218,165,33,0.5)] group-hover:text-white transition-colors">Group</span>
+                    <a id="nav-logo" href="/" className="relative z-50 block hover:scale-105 transition-transform duration-300">
+                        <img
+                            src={logo}
+                            alt="Expeditions Group Logo"
+                            className="h-12 md:h-14 lg:h-16 w-auto object-contain"
+                        />
                     </a>
 
                     {/* Desktop Navigation */}
@@ -101,6 +105,7 @@ export default function Navbar() {
                                 >
                                     {link.isButton ? (
                                         <a
+                                            id={`nav-link-${link.name.toLowerCase().replace(/\s+/g, '-')}`}
                                             href={link.href}
                                             target={link.target || "_self"}
                                             rel={link.target === "_blank" ? "noopener noreferrer" : ""}
@@ -110,6 +115,7 @@ export default function Navbar() {
                                         </a>
                                     ) : (
                                         <a
+                                            id={`nav-link-${link.name.toLowerCase().replace(/\s+/g, '-')}`}
                                             href={link.href}
                                             target={link.target || "_self"}
                                             rel={link.target === "_blank" ? "noopener noreferrer" : ""}
@@ -141,6 +147,7 @@ export default function Navbar() {
                                             >
                                                 {link.children.map((child) => (
                                                     <a
+                                                        id={`nav-child-${child.name.toLowerCase().replace(/\s+/g, '-')}`}
                                                         key={child.name}
                                                         href={child.href}
                                                         className={`block px-4 py-3 transition-colors font-medium text-sm ${activeLink === child.href
@@ -161,8 +168,11 @@ export default function Navbar() {
 
                     {/* Mobile Menu Button (Hamburger) */}
                     <button
+                        id="mobile-menu-toggle"
                         className="xl:hidden text-white focus:outline-none relative z-50"
                         onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                        aria-label={isMobileMenuOpen ? "Cerrar menú" : "Abrir menú"}
+                        aria-expanded={isMobileMenuOpen}
                     >
                         {isMobileMenuOpen ? (
                             <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -194,6 +204,7 @@ export default function Navbar() {
                                     <div key={link.name} className="flex flex-col">
                                         {link.isButton ? (
                                             <a
+                                                id={`mobile-nav-link-${link.name.toLowerCase().replace(/\s+/g, '-')}`}
                                                 href={link.href}
                                                 target={link.target || "_self"}
                                                 rel={link.target === "_blank" ? "noopener noreferrer" : ""}
@@ -206,6 +217,7 @@ export default function Navbar() {
                                             <>
                                                 <div className="flex items-center justify-between">
                                                     <a
+                                                        id={`mobile-nav-link-${link.name.toLowerCase().replace(/\s+/g, '-')}`}
                                                         href={link.href}
                                                         target={link.target || "_self"}
                                                         rel={link.target === "_blank" ? "noopener noreferrer" : ""}

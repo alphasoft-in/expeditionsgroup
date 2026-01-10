@@ -4,7 +4,15 @@ import PageHeader from "../components/PageHeader.jsx";
 import ContactContent from "../components/ContactContent.jsx";
 
 // Using a reusable asset for consistency, or update if a specific contact image is available
-import heroBg from "../assets/about.avif?url";
+import heroBg from "../assets/about.avif";
+import { getImage } from "astro:assets";
+
+const optimizedHeroBg = await getImage({
+    src: heroBg,
+    format: "avif",
+    width: 1920,
+    quality: 80,
+});
 ---
 
 <Layout title="Contáctanos | Expeditions Group">
@@ -12,7 +20,7 @@ import heroBg from "../assets/about.avif?url";
         <PageHeader
             title="Contáctanos"
             subtitle="Estamos aquí para planificar tu próxima gran aventura. ¡Escríbenos hoy!"
-            image={heroBg}
+            image={optimizedHeroBg.src}
             client:load
         />
 

@@ -3,6 +3,15 @@ import "../styles/global.css";
 import Navbar from "../components/Navbar.jsx";
 import Footer from "../components/Footer.jsx";
 import WhatsAppButton from "../components/WhatsAppButton.jsx";
+import logo from "../assets/nuevo-logo.png";
+import { getImage } from "astro:assets";
+
+const optimizedLogo = await getImage({
+	src: logo,
+	format: "avif",
+	width: 300,
+	quality: 90,
+});
 
 interface Props {
 	title: string;
@@ -10,6 +19,7 @@ interface Props {
 	image?: string;
 	showNavbar?: boolean;
 	showFooter?: boolean;
+	showWhatsApp?: boolean;
 }
 
 const {
@@ -18,6 +28,7 @@ const {
 	image = "/og-image.png",
 	showNavbar = true,
 	showFooter = true,
+	showWhatsApp = true,
 } = Astro.props;
 
 const canonicalURL = new URL(
@@ -104,46 +115,13 @@ const socialImageURL = new URL(image, Astro.url);
 
 		<!-- Accesibilidad y mejoras UX -->
 		<meta name="theme-color" content="#0f172a" />
+
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 	</head>
 	<body class="bg-light text-accent overflow-x-hidden">
-		<!-- Preloader -->
-		<div
-			id="preloader"
-			class="fixed inset-0 z-[9999] flex items-center justify-center bg-white transition-opacity duration-500"
-		>
-			<div class="flex flex-col items-center gap-4">
-				<div
-					class="w-16 h-16 border-4 border-slate-100 border-t-[#0081C9] rounded-full animate-spin"
-				>
-				</div>
-				<div class="flex flex-col items-center">
-					<span
-						class="text-slate-800 font-bold text-lg tracking-widest"
-						>EXPEDITIONS</span
-					>
-					<span
-						class="text-[#0081C9] text-xs font-semibold tracking-[0.3em]"
-						>GROUP</span
-					>
-				</div>
-			</div>
-		</div>
-
-		<script>
-			window.addEventListener("load", () => {
-				const preloader = document.getElementById("preloader");
-				if (preloader) {
-					preloader.style.opacity = "0";
-					setTimeout(() => {
-						preloader.style.display = "none";
-					}, 500);
-				}
-			});
-		</script>
-
-		{showNavbar && <Navbar client:load />}
+		{showNavbar && <Navbar client:load logo={optimizedLogo.src} />}
 		<slot />
-		{showFooter && <Footer client:visible />}
-		<WhatsAppButton client:load />
+		{showFooter && <Footer client:visible logo={optimizedLogo.src} />}
+		{showWhatsApp && <WhatsAppButton client:idle />}
 	</body>
 </html>

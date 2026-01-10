@@ -1,6 +1,15 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import DashboardComponent from "../components/Dashboard.jsx";
+import logo from "../assets/logo2.png";
+import { getImage } from "astro:assets";
+
+const optimizedLogo = await getImage({
+    src: logo,
+    format: "avif",
+    width: 300,
+    quality: 90,
+});
 ---
 
 <Layout
@@ -8,6 +17,7 @@ import DashboardComponent from "../components/Dashboard.jsx";
     description="Panel de control para usuarios registrados."
     showNavbar={false}
     showFooter={false}
+    showWhatsApp={false}
 >
-    <DashboardComponent client:only="react" />
+    <DashboardComponent client:only="react" logo={optimizedLogo.src} />
 </Layout>

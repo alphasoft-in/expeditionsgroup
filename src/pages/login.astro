@@ -1,6 +1,15 @@
 ---
 import "../styles/global.css";
 import LoginForm from "../components/LoginForm.jsx";
+import logo from "../assets/logo-cuadrado.png";
+import { getImage } from "astro:assets";
+
+const optimizedLogo = await getImage({
+    src: logo,
+    format: "avif",
+    width: 300,
+    quality: 90,
+});
 ---
 
 <!doctype html>
@@ -60,12 +69,11 @@ import LoginForm from "../components/LoginForm.jsx";
             <div class="relative z-10 w-full max-w-md">
                 <div class="text-center mb-8">
                     <div class="inline-block relative group">
-                        <h1
-                            class="text-3xl font-bold text-slate-800 tracking-wide"
-                        >
-                            Expeditions <span class="text-secondary">Group</span
-                            >
-                        </h1>
+                        <img
+                            src={optimizedLogo.src}
+                            alt="Expeditions Group Logo"
+                            class="w-24 sm:w-32 h-auto mx-auto object-contain hover:scale-105 transition-transform duration-300"
+                        />
                     </div>
                 </div>
 
