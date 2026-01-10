@@ -6,7 +6,7 @@ import autoTable from 'jspdf-autotable';
 import { supabase } from '../lib/supabase';
 import DashboardCharts from './DashboardCharts';
 
-import DashboardCharts from './DashboardCharts';
+
 
 export default function Dashboard({ logo }) {
     const [operations, setOperations] = useState([]);
