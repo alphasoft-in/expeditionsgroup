@@ -3,7 +3,7 @@ import "../styles/global.css";
 import Navbar from "../components/Navbar.jsx";
 import Footer from "../components/Footer.jsx";
 import WhatsAppButton from "../components/WhatsAppButton.jsx";
-import logo from "../assets/nuevo-logo.png";
+import logo from "../assets/nuevo-logo.avif";
 import { getImage } from "astro:assets";
 
 const optimizedLogo = await getImage({
@@ -97,7 +97,7 @@ const socialImageURL = new URL(image, Astro.url);
 				"@context": "https://schema.org",
 				"@type": "TravelAgency",
 				"name": "Expeditions Group",
-				"image": "https://www.expeditionsgroup.com/logo.png",
+				"image": "https://www.expeditionsgroup.com/logo.avif",
 				"@id": "https://www.expeditionsgroup.com",
 				"url": "https://www.expeditionsgroup.com",
 				"telephone": "+51999999999",

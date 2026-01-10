@@ -59,9 +59,9 @@ export default function Footer({ logo }) {
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                                 </svg>
                                 <div className="flex flex-col space-y-1">
-                                    <a id="footer-phone-1" href="tel:012410920" className="hover:text-white transition-colors">(01) 241-0920</a>
-                                    <a id="footer-phone-2" href="tel:+51996667974" className="hover:text-white transition-colors">+51 996 667 974</a>
-                                    <a id="footer-phone-3" href="tel:+51993270594" className="hover:text-white transition-colors">+51 993 270 594</a>
+                                    <a id="footer-phone-1" href="tel:012410920" className="hover:text-white transition-colors" aria-label="Llamar al teléfono fijo (01) 241-0920">(01) 241-0920</a>
+                                    <a id="footer-phone-2" href="tel:+51996667974" className="hover:text-white transition-colors" aria-label="Llamar al celular +51 996 667 974">+51 996 667 974</a>
+                                    <a id="footer-phone-3" href="tel:+51993270594" className="hover:text-white transition-colors" aria-label="Llamar al celular +51 993 270 594">+51 993 270 594</a>
                                 </div>
                             </li>
                             <li className="flex items-center gap-3">

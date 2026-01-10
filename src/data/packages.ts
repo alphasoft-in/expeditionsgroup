@@ -1,29 +1,29 @@
 
 // Import images from assets
 // Import images from assets
-import puntaCanaImg from '../assets/paquetes/punta-cana.png';
-import puntaCanaHeaderImg from '../assets/breadcrumb/punta-cana.png';
-import rivieraMayaHeaderImg from '../assets/breadcrumb/riviera-maya.png';
-import rivieraMayaImg from '../assets/paquetes/riviera-maya.png';
-import cartagenaHeaderImg from '../assets/breadcrumb/cartagena-de-indias.png';
-import cartagenaImg from '../assets/paquetes/cartagena-de-indias.png';
-import sanAndresHeaderImg from '../assets/breadcrumb/san-andres.png';
-import sanAndresImg from '../assets/paquetes/san-andres.png';
-import royalDecameronHeaderImg from '../assets/breadcrumb/royal-decameron.png';
-import royalDecameronImg from '../assets/paquetes/royal-decameron.png';
+import puntaCanaImg from '../assets/paquetes/punta-cana.avif';
+import puntaCanaHeaderImg from '../assets/breadcrumb/punta-cana.avif';
+import rivieraMayaHeaderImg from '../assets/breadcrumb/riviera-maya.avif';
+import rivieraMayaImg from '../assets/paquetes/riviera-maya.avif';
+import cartagenaHeaderImg from '../assets/breadcrumb/cartagena-de-indias.avif';
+import cartagenaImg from '../assets/paquetes/cartagena-de-indias.avif';
+import sanAndresHeaderImg from '../assets/breadcrumb/san-andres.avif';
+import sanAndresImg from '../assets/paquetes/san-andres.avif';
+import royalDecameronHeaderImg from '../assets/breadcrumb/royal-decameron.avif';
+import royalDecameronImg from '../assets/paquetes/royal-decameron.avif';
 
-import cuscoHeaderImg from '../assets/breadcrumb/cusco-magico.png';
-import cuscoImg from '../assets/paquetes/cusco-magico.png';
-import tarapotoImg from '../assets/paquetes/tarapoto.png';
-import tarapotoHeaderImg from '../assets/breadcrumb/tarapoto.png';
-import playasDelNorteImg from '../assets/paquetes/playas-del-norte-rustica-vichayito.png';
-import playasDelNorteHeaderImg from '../assets/breadcrumb/rustica-vichayito.png';
-import cajamarcaImg from '../assets/paquetes/cajamarca.png';
-import arequipaImg from '../assets/paquetes/arequipa.png';
-import arequipaHeaderImg from '../assets/breadcrumb/arequipa.png';
-import surMagicoImg from '../assets/paquetes/sur-magico-dunas.png';
-import surMagicoHeaderImg from '../assets/breadcrumb/sur-magico.png';
-import boliviaImg from '../assets/paquetes/bolivia.png';
+import cuscoHeaderImg from '../assets/breadcrumb/cusco-magico.avif';
+import cuscoImg from '../assets/paquetes/cusco-magico.avif';
+import tarapotoImg from '../assets/paquetes/tarapoto.avif';
+import tarapotoHeaderImg from '../assets/breadcrumb/tarapoto.avif';
+import playasDelNorteImg from '../assets/paquetes/playas-del-norte-rustica-vichayito.avif';
+import playasDelNorteHeaderImg from '../assets/breadcrumb/rustica-vichayito.avif';
+import cajamarcaImg from '../assets/paquetes/cajamarca.avif';
+import arequipaImg from '../assets/paquetes/arequipa.avif';
+import arequipaHeaderImg from '../assets/breadcrumb/arequipa.avif';
+import surMagicoImg from '../assets/paquetes/sur-magico-dunas.avif';
+import surMagicoHeaderImg from '../assets/breadcrumb/sur-magico.avif';
+import boliviaImg from '../assets/paquetes/bolivia.avif';
 
 export const packages = [
     {
