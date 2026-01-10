@@ -10,6 +10,7 @@ const WhatsAppButton = () => {
             href={whatsappUrl}
             target="_blank"
             rel="noopener noreferrer"
+            aria-label="Contactar a Expeditions Group por WhatsApp"
             initial={{ scale: 0, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             whileHover={{ scale: 1.1 }}

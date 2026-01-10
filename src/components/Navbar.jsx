@@ -237,6 +237,8 @@ export default function Navbar({ logo }) {
                                                         <button
                                                             onClick={() => toggleMobileSubmenu(link.name)}
                                                             className={`p-2 hover:text-white ${isActive ? 'text-secondary' : 'text-white/70'}`}
+                                                            aria-label={mobileExpandedLink === link.name ? `Cerrar submenú de ${link.name}` : `Abrir submenú de ${link.name}`}
+                                                            aria-expanded={mobileExpandedLink === link.name}
                                                         >
                                                             <svg xmlns="http://www.w3.org/2000/svg" className={`h-6 w-6 transition-transform ${mobileExpandedLink === link.name ? 'rotate-180' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
