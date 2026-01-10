@@ -103,6 +103,7 @@ export default function Hero({ slides }) {
                             key={index}
                             onClick={() => setCurrent(index)}
                             aria-label={`Ir a la diapositiva ${index + 1}`}
+                            title={`Ir a la diapositiva ${index + 1}`}
                             className="group w-12 h-12 flex items-center justify-center focus:outline-none"
                         >
                             <span className={`block w-3 h-3 rounded-full transition-all duration-300 ${index === current ? "bg-tertiary w-8" : "bg-white/50 group-hover:bg-white"

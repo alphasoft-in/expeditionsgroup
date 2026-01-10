@@ -171,7 +171,8 @@ export default function Navbar({ logo }) {
                         id="mobile-menu-toggle"
                         className="xl:hidden p-2 text-white focus:outline-none relative z-50 min-w-[48px] min-h-[48px] flex items-center justify-center"
                         onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                        aria-label={isMobileMenuOpen ? "Cerrar menú principal" : "Abrir menú principal"}
+                        aria-label="Menú principal"
+                        title="Menú principal"
                         aria-expanded={isMobileMenuOpen}
                     >
                         {isMobileMenuOpen ? (
